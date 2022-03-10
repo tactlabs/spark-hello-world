@@ -4,6 +4,10 @@
 
 https://stackoverflow.com/questions/43533751/spark-reading-from-postgres-jdbc-table-slow
 
+https://github.com/shubhamgosain/Scala-Tutorial/blob/master/Scala%20jdbc%20connection--Document%204
+
+https://sparkbyexamples.com/apache-spark-rdd/spark-read-multiple-text-files-into-a-single-rdd/
+
 */
 
 // import required spark classes
@@ -89,6 +93,13 @@ object HelloWorld {
 
     print (list.size)
   }
+
+  def readFile(spark: SparkSession){
+    val rdd = spark.sparkContext.textFile("one.txt")
+    rdd.foreach(f=>{
+        println(f)
+    })
+  }
   
   def main(args: Array[String]) {
  
@@ -104,7 +115,8 @@ object HelloWorld {
     val rdd = spark.sparkContext.parallelize(Array(1 to 10))
     // println(rdd.count())
     
-    exec2(spark)
+    // exec2(spark)
+    readFile(spark)
 
     println("************")
     println("************")
