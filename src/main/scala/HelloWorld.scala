@@ -15,7 +15,7 @@ object HelloWorld {
     println("************")
     println("Hello, world!")
     val rdd = spark.sparkContext.parallelize(Array(1 to 10))
-    rdd.count()
+    println(rdd.count())
     println("************")
     println("************")
     
