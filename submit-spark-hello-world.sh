@@ -13,4 +13,4 @@ SPARK_HOME=/usr/local/Cellar/apache-spark/3.2.1/libexec
 JARFILE=`pwd`/target/scala-2.12/HelloWorld-assembly-0.1.0.jar
 
 # Run it locally
-${SPARK_HOME}/bin/spark-submit --class HelloWorld --master local $JARFILE
+${SPARK_HOME}/bin/spark-submit --class HelloWorld --master local $JARFILE --conf "spark.executor.extraClassPath=/Users/str-kwml0020/projects/postgresql-42.3.0.jar" --conf "spark.driver.extraClassPath=/Users/str-kwml0020/projects/postgresql-42.3.0.jar"

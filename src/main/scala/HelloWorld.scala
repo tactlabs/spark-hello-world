@@ -16,52 +16,56 @@ import scala.collection.mutable.ArrayBuffer;
 // define main method (Spark entry point)
 object HelloWorld {
 
-  def exec() {
+  // def exec() {
 
-    // val dbHost = ""
+  //   // val dbHost = ""
 
-    val url = ("jdbc:postgresql://localhost/postgres"+ 
-    "?tcpKeepAlive=true&prepareThreshold=-1&binaryTransfer=true&defaultRowFetchSize=10000")
+  //   val url = ("jdbc:postgresql://localhost/postgres"+ 
+  //   "?tcpKeepAlive=true&prepareThreshold=-1&binaryTransfer=true&defaultRowFetchSize=10000")
 
-    val conn = DriverManager.getConnection(url, "postgres", "root");
+  //   val conn = DriverManager.getConnection(url, "postgres", "root");
 
-    val sqlText = """SELECT "cityid", "cname", "userId", "state" 
-            FROM city 
-            """
+  //   val sqlText = """SELECT "cityid", "cname", "userId", "state" 
+  //           FROM city 
+  //           """
 
-    val t0 = System.nanoTime()
+  //   val t0 = System.nanoTime()
 
-    val stmt = conn.prepareStatement(sqlText, ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY)
+  //   val stmt = conn.prepareStatement(sqlText, ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY)
 
-    val rs = stmt.executeQuery()
+  //   val rs = stmt.executeQuery()
 
-    val list = new ArrayBuffer[(Long, Long, Long, Double)]()
+  //   val list = new ArrayBuffer[(Long, Long, Long, Double)]()
 
-    while (rs.next()) {
-        val seriesId = rs.getLong("seriesId")
-        val companyId = rs.getLong("companyId")
-        val userId = rs.getLong("userId")
-        val score = rs.getDouble("score")
-        list.append((seriesId, companyId, userId, score))
-    }
+  //   while (rs.next()) {
+  //       val seriesId = rs.getLong("seriesId")
+  //       val companyId = rs.getLong("companyId")
+  //       val userId = rs.getLong("userId")
+  //       val score = rs.getDouble("score")
+  //       list.append((seriesId, companyId, userId, score))
+  //   }
 
-    val t1 = System.nanoTime()
+  //   val t1 = System.nanoTime()
 
-    println("Elapsed time: " + (t1 - t0) * 1e-9 + "s")
+  //   println("Elapsed time: " + (t1 - t0) * 1e-9 + "s")
 
-    println(list)
+  //   println(list)
 
-    println(list.size)
+  //   println(list.size)
 
-    rs.close()
-    stmt.close()
-    conn.close()
-  }
+  //   rs.close()
+  //   stmt.close()
+  //   conn.close()
+  // }
 
   def exec2(spark: SparkSession) {
     
     val url = ("jdbc:postgresql://localhost/postgres"+ 
     "?tcpKeepAlive=true&prepareThreshold=-1&binaryTransfer=true&defaultRowFetchSize=10000")
+
+    val driver = "org.postgresql.Driver"
+
+    Class.forName(driver)
 
     val t0 = System.nanoTime()
 
