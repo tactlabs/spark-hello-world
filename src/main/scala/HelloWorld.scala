@@ -25,3 +25,17 @@ object HelloWorld {
   }
 }
 
+
+var i=0
+var length=0
+val data=Source.fromFile(/home/nagulraj/tact/datasets/user-2022-01-05.csv)
+for (line <- data.getLines) {
+  val cols = line.split(",").map(_.trim)
+  length = cols.length  
+  while(i<length){
+    println(cols(i))
+    i=i+1
+  }
+  i=0
+}
+
